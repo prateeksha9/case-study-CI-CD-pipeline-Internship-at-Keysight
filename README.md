@@ -16,8 +16,6 @@ A public, sanitized technical case study of a CI pipeline I designed and impleme
 - [Key Design Decisions](#key-design-decisions)
 - [Validation Strategy](#validation-strategy)
 - [Failure Handling and Debuggability](#failure-handling-and-debuggability)
-- [Repo Structure](#repo-structure)
-- [Local Reproduction (Sanitized)](#local-reproduction-sanitized)
 - [Extending the Test Suite](#extending-the-test-suite)
 - [Security and Public-Repo Notes](#security-and-public-repo-notes)
 - [Results](#results)
