@@ -1,8 +1,8 @@
 # CI Pipeline Case Study: VM-Based System Validation in QEMU
 
-A public, sanitized technical case study of a CI pipeline I designed and implemented during an industry internship. The pipeline boots a Linux VM in QEMU using a deterministic **kernel + initrd** approach, provisions the instance, runs functional workflows, validates outputs using a **Go Cobra CLI** test harness, and publishes versioned artifacts for reproducible future runs.
+A public, sanitized technical case study of a CI pipeline I designed and implemented during an industry internship at Keysight. The pipeline boots a Linux VM in QEMU using a deterministic **kernel + initrd** approach, provisions the instance, runs functional workflows, validates outputs using a **Go Cobra CLI** test harness, and publishes versioned artifacts for reproducible future runs.
 
-> Note: Organization names, internal URLs, proprietary configs, and product-specific commands are intentionally generalized. The architecture, engineering decisions, and validation strategy reflect the work I delivered.
+> Note: internal URLs, proprietary configs, and product-specific commands are intentionally generalized. The architecture, engineering decisions, and validation strategy reflect the work I delivered.
 
 ---
 
