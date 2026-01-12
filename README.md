@@ -78,15 +78,6 @@ On every pipeline run:
 
 ### High-level flow
 
-```mermaid
-flowchart LR
-  A[CI Runner] --> B[Fetch baseline VM image]
-  B --> C[Boot QEMU VM via kernel + initrd]
-  C --> D[Provision + smoke checks as user1]
-  D --> E[Run functional workflows]
-  E --> F[Validate outputs via Go Cobra CLI as user2]
-  F --> G[Publish updated VM image + logs]
-
 ---
 
 ## Components
