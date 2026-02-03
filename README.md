@@ -1,6 +1,6 @@
 # CI Pipeline Case Study: VM-Based System Validation in QEMU
 
-A public, sanitized technical case study of a CI pipeline I designed and implemented during an industry internship at Keysight. The pipeline boots a Linux VM in QEMU using a deterministic **kernel + initrd** approach, provisions the instance, runs functional workflows, validates outputs using a **Go Cobra CLI** test harness, and publishes versioned artifacts for reproducible future runs.
+A public, sanitized technical case study of a CI pipeline I designed and implemented during an industry internship at Keysight. The pipeline boots a Linux VM in QEMU using a deterministic **kernel and initrd** approach, provisions the instance, runs functional workflows, validates outputs using a **Go Cobra CLI** test harness, and publishes versioned artifacts for reproducible future runs.
 
 I built a CI pipeline that boots Linux VMs deterministically in QEMU, runs real system workflows, validates behavior via a Go-based CLI harness, and publishes versioned artifacts for reproducible debugging.
 
@@ -64,7 +64,7 @@ CI needed a deterministic way to boot a VM, provision it, run real workflows, an
 On every pipeline run:
 
 1. Fetch a baseline VM image from an artifact repository
-2. Boot the VM in QEMU using an explicit kernel + initrd method
+2. Boot the VM in QEMU using an explicit kernel and initrd method
 3. Provision and run smoke checks as a setup user (`user1`)
 4. Execute functional workflows representing real operations
 5. Validate expected outputs using a Go Cobra CLI harness as a test user (`user2`)
@@ -84,7 +84,7 @@ On every pipeline run:
 
 - **CI Orchestrator:** GitLab CI/CD (pattern is CI-agnostic)
 - **Virtualization:** QEMU
-- **Boot Strategy:** explicit kernel + initrd for repeatable startup
+- **Boot Strategy:** explicit kernel and initrd for repeatable startup
 - **Provisioning:** scripted, non-interactive setup
 - **Test Harness:** Go + Cobra CLI for consistent command execution
 - **Artifact Store:** generic artifact repository (versioned VM images + logs)
@@ -100,7 +100,7 @@ On every pipeline run:
 - baseline VM image downloaded
 - metadata captured (commit hash, pipeline id)
 
-### Stage 1: Boot the VM (kernel + initrd)
+### Stage 1: Boot the VM (kernel and initrd boot)
 **Purpose:** deterministic boot in CI, independent of guest bootloader configuration.
 
 **Signals:**
@@ -145,10 +145,10 @@ On every pipeline run:
 
 ## Key Design Decisions
 
-### Why kernel + initrd boot
+### Why kernel and initrd boot
 I initially explored SSH-based and serial-console automation, but it required bootloader-level changes and increased maintenance overhead.
 
-Switching to a kernel + initrd approach improved:
+Switching to a kernel and initrd approach improved:
 - boot determinism in CI
 - isolation from bootloader drift
 - early boot visibility through captured console logs
