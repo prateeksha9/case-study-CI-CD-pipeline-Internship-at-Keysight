@@ -164,7 +164,7 @@ qemu-system-x86_64 \
   -netdev user,id=net0,hostfwd=tcp::<SSH_PORT>-:22 \
   -device e1000,netdev=net0 \
   -serial mon:stdio \
-  -nographic```
+  -nographic
 
 ### Why two users (`user1` and `user2`)
 - `user1` handles provisioning and sanity checks
