@@ -2,7 +2,9 @@
 
 A public, sanitized technical case study of a CI pipeline I designed and implemented during an industry internship at Keysight. The pipeline boots a Linux VM in QEMU using a deterministic **kernel + initrd** approach, provisions the instance, runs functional workflows, validates outputs using a **Go Cobra CLI** test harness, and publishes versioned artifacts for reproducible future runs.
 
-> Note: internal URLs, proprietary configs, and product-specific commands are intentionally generalized. The architecture, engineering decisions, and validation strategy reflect the work I delivered.
+I built a CI pipeline that boots Linux VMs deterministically in QEMU, runs real system workflows, validates behavior via a Go-based CLI harness, and publishes versioned artifacts for reproducible debugging.
+
+> Note: This repository is intended as an architectural and validation case study, not a runnable drop-in CI template. Internal URLs, proprietary configs, and product-specific commands are intentionally generalized. The architecture, engineering decisions, and validation strategy reflect the work I delivered.
 
 ---
 
@@ -72,7 +74,9 @@ On every pipeline run:
 
 ## Architecture
 
-### High-level flow
+## High-Level Pipeline Flow
+
+![CI pipeline flow](docs/ci-flow.png)
 
 ---
 
@@ -90,7 +94,7 @@ On every pipeline run:
 ## Pipeline Stages
 
 ### Stage 0: Fetch baseline VM artifact
-**Purpose:** start from a known-good baseline and prevent environment drift.
+**Purpose:** start from a known-good baseline and prevent environment drift over time.
 
 **Outputs:**
 - baseline VM image downloaded
@@ -111,13 +115,13 @@ On every pipeline run:
 - dependency and config verification
 - basic command smoke tests
 
-### Stage 3: Execute functional workflows
+### Stage 3: Functional workflow validation
 **Purpose:** validate production-like behavior end to end.
 
 **Representative workflow categories:**
 - “check-out/check-in”-style stateful operations
 - activation and deactivation transitions
-- stats or status queries to confirm server-side state
+- stats or status queries to confirm system state
 
 ### Stage 4: Validate outputs via CLI harness as `user2`
 **Purpose:** deterministic pass/fail and consistent validation.
@@ -142,12 +146,27 @@ On every pipeline run:
 ## Key Design Decisions
 
 ### Why kernel + initrd boot
-I initially explored SSH and serial-console automation, but it required bootloader-level changes and increased maintenance overhead.
+I initially explored SSH-based and serial-console automation, but it required bootloader-level changes and increased maintenance overhead.
 
 Switching to a kernel + initrd approach improved:
 - boot determinism in CI
 - isolation from bootloader drift
 - early boot visibility through captured console logs
+
+<details>
+<summary><b>Example QEMU boot command (sanitized)</b></summary>
+
+```bash
+qemu-system-x86_64 \
+  -machine q35 -m 4096 \
+  -kernel <VMLINUX> -initrd <INITRD> \
+  -append "console=ttyS0 root=<ROOT_DEVICE> rw" \
+  -drive file=<VM_IMAGE>,format=raw \
+  -netdev user,id=net0,hostfwd=tcp::<SSH_PORT>-:22 \
+  -device e1000,netdev=net0 \
+  -serial mon:stdio \
+  -nographic
+</details> ```
 
 ### Why two users (`user1` and `user2`)
 - `user1` handles provisioning and sanity checks
