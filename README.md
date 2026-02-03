@@ -165,6 +165,7 @@ qemu-system-x86_64 \
   -device e1000,netdev=net0 \
   -serial mon:stdio \
   -nographic
+```
 
 ### Why two users (`user1` and `user2`)
 - `user1` handles provisioning and sanity checks
