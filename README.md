@@ -80,6 +80,11 @@ On every pipeline run:
 
 ---
 
+## Tech Stack:
+Python (PyTest) | QEMU | Go (Cobra) | GitLab CI | Bash | Linux Kernel
+
+---
+
 ## Components
 
 - **CI Orchestrator:** GitLab CI/CD (pattern is CI-agnostic)
