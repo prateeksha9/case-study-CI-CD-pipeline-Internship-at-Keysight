@@ -255,6 +255,8 @@ This approach enabled:
 - reduced environment drift through versioned artifacts
 - faster debugging via stage-specific logs and clear failure boundaries
 
+> Note: This pipeline was used as part of a production CI workflow to validate system behavior before releases.
+
 ---
 
 ## What I Would Improve Next
