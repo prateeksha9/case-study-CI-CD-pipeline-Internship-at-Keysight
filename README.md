@@ -153,8 +153,7 @@ Switching to a kernel + initrd approach improved:
 - isolation from bootloader drift
 - early boot visibility through captured console logs
 
-<details>
-<summary><b>Example QEMU boot command (sanitized)</b></summary>
+Example QEMU boot command (sanitized)
 
 ```bash
 qemu-system-x86_64 \
@@ -166,7 +165,6 @@ qemu-system-x86_64 \
   -device e1000,netdev=net0 \
   -serial mon:stdio \
   -nographic```
-</details> 
 
 ### Why two users (`user1` and `user2`)
 - `user1` handles provisioning and sanity checks
